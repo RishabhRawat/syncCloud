@@ -2,6 +2,8 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
+var compress = require('compression');
+
 
 
 /**
@@ -114,6 +116,7 @@ var SampleApp = function() {
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
         }
+        self.app.use(compress());
         // My own statics
         self.app.use('/css',express.static('css'));
         self.app.use('/js',express.static('js'));
