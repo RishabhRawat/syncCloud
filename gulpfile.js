@@ -86,6 +86,7 @@ gulp.task ('copy:.htaccess', function () {
 gulp.task ('copy:index.html', function () {
     return gulp.src (dirs.src + '/index.html')
         .pipe (plugins.replace (/{{JQUERY_VERSION}}/g, pkg.devDependencies.jquery))
+        .pipe (plugins.replace (/{{ANGULAR_VERSION}}/g, pkg.dependencies.angular.replace('^', '')))
         .pipe (gulp.dest (dirs.dist));
 });
 
