@@ -1,0 +1,61 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #f7fcff;
+$primary-text-color: #000000;
+$secondary-color: #404040;
+$secondary-text-color: #5890AD;
+
+%button {
+  border: solid $primary-color 2px;
+  border-radius: 10px;
+  color: $secondary-color;
+  font: 100% $font-stack;
+  padding: 0;
+
+}
+
+nav {
+  background-color: $secondary-color;
+  margin: 0;
+  overflow: hidden;
+
+  ul {
+    margin: 0;
+    padding-left: 1%;
+    padding-right: 1%;
+    height: 3em;
+
+
+    li {
+      display: inline-block;
+      height: inherit;
+      list-style-type: none;
+    }
+
+    li a {
+      background-color: transparent;
+      color: $secondary-text-color;
+      display: block;
+      font-weight: bold;
+      line-height: 3em;
+      padding-left: .5em;
+      padding-right: .5em;
+      text-decoration: none;
+      vertical-align: middle;
+    }
+
+    li button {
+      @extend %button;
+      color: $secondary-text-color;
+      display: block;
+      line-height: 1.5em;
+      margin: calc(.75em - 2px) 0;
+      padding: 0 .5em;
+      text-decoration: none;
+    }
+  }
+}
+
+body {
+  background-color: $primary-color;
+  overflow: hidden;
+}

@@ -16,6 +16,8 @@ var dirs = pkg['h5bp-configs'].directories;
 
 var upload = 'C:/Users/risha/Documents/syncCloud/synccloud';
 
+var production = false;
+
 // ---------------------------------------------------------------------
 // | Helper tasks                                                      |
 // ---------------------------------------------------------------------
@@ -122,21 +124,31 @@ gulp.task ('copy:main.css', function () {
 });
 
 gulp.task ('copy:misc', function () {
-    return gulp.src ([
 
-                         // Copy all files
-                         dirs.src + '/**/*',
+    var copyList;
+    if (production) {
+        copyList = [
+            // Copy all files
+            dirs.src + '/**/*',
 
-                         // Exclude the following files
-                         // (other tasks will handle the copying of these files)
-                         '!' + dirs.src + '/css/main.css',
-                         '!' + dirs.src + '/index.html'
+            // Exclude the following files
+            // (other tasks will handle the copying of these files)
+            '!' + dirs.src + '/css/main.css',
+            '!' + dirs.src + '/css/*.map',
+            '!' + dirs.src + '/index.html'
+        ];
+    }
+    else {
+        copyList = [
+            dirs.src + '/**/*',
+            '!' + dirs.src + '/css/main.css',
+            '!' + dirs.src + '/index.html'
+        ];
+    }
 
-                     ], {
-
+    return gulp.src (copyList, {
                          // Include hidden files by default
                          dot: true
-
                      }).pipe (gulp.dest (dirs.dist));
 });
 
@@ -181,6 +193,7 @@ gulp.task ('build', function (done) {
         done);
 });
 gulp.task ('deploy', function (done) {
+    production = true;
     runSequence (
         'build',
         'copyAndDeploy',
